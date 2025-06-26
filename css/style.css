@@ -1,7 +1,89 @@
+/* style.css */
+
 body {
     font-family: 'Open Sans', sans-serif;
+    scroll-behavior: smooth;
+    background-color: #f3f4f6;
+
+    /* style.css */
+
+    /* ... (các style hiện có của bạn) ... */
+
+    /* Keyframes cho hiệu ứng lấp lánh */
+    @keyframes sparkle-animation {
+        0% {
+            transform: scale(0) rotate(45deg);
+            opacity: 0;
+        }
+        50% {
+            transform: scale(1) rotate(45deg);
+            opacity: 1;
+        }
+        100% {
+            transform: scale(0) rotate(45deg);
+            opacity: 0;
+        }
+    }
+
+    /* Style cho nút lấp lánh */
+    .group a.relative.overflow-hidden::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: rgba(255, 255, 255, 0.4); /* Màu lấp lánh */
+        transform: scale(0) rotate(45deg);
+        transition: none; /* Đảm bảo không bị ảnh hưởng bởi transition chung của a */
+        pointer-events: none; /* Cho phép click xuyên qua */
+    }
+
+    .group:hover a.relative.overflow-hidden::before {
+        animation: sparkle-animation 0.7s ease-in-out forwards; /* Thời gian và kiểu animation */
+    }
 }
 
-h1, h2, h3, h4, h5, h6 {
+/* Typography refinement */
+h1, h2 {
     font-family: 'Montserrat', sans-serif;
+    letter-spacing: -0.5px;
+}
+
+/* Card hover custom effect */
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Smooth link transition */
+a {
+    transition: all 0.3s ease;
+}
+
+/* Call-to-action buttons */
+a.bg-blue-600 {
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+/* Footer icons hover effect */
+footer a:hover {
+    transform: scale(1.2);
+}
+
+/* AOS custom animation override */
+[data-aos] {
+    transition-duration: 800ms;
+    transition-timing-function: ease-in-out;
+}
+
+/* Responsive fine-tuning */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2rem;
+    }
+    .text-lg {
+        font-size: 1rem;
+    }
 }

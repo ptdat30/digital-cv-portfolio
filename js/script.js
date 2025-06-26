@@ -8,5 +8,3 @@ document.addEventListener('DOMContentLoaded', (event) => {
     });
 });
 
-// Any other custom JavaScript for interactions can go here
-// (e.g., smooth scrolling, dynamic content loading if needed)
