@@ -1,0 +1,13 @@
+/* css/style.css */
+
+/* Define custom fonts from Google Fonts */
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Custom Tailwind configuration (optional, can be done via tailwind.config.js if you use PostCSS) */
+/* For CDN, you can add custom styles here to override or extend Tailwind */
