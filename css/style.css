@@ -23,6 +23,7 @@ body {
             transform: scale(0) rotate(45deg);
             opacity: 0;
         }
+
     }
 
     /* Style cho nút lấp lánh */
@@ -41,6 +42,16 @@ body {
 
     .group:hover a.relative.overflow-hidden::before {
         animation: sparkle-animation 0.7s ease-in-out forwards; /* Thời gian và kiểu animation */
+    }
+
+    .fab.fa-facebook:hover {
+        color: #1877F2 !important; /* Facebook blue */
+    }
+
+    .fab.fa-instagram:hover {
+        background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%) !important;
+        -webkit-background-clip: text !important;
+        -webkit-text-fill-color: transparent !important;
     }
 }
 
@@ -85,5 +96,18 @@ footer a:hover {
     }
     .text-lg {
         font-size: 1rem;
+    }
+    @keyframes text-sparkle {
+        0%, 100% {
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5), 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+        50% {
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.6);
+        }
+    }
+
+    /* Class để áp dụng hiệu ứng lấp lánh text */
+    .sparkle-text {
+        animation: text-sparkle 2s infinite alternate; /* Áp dụng animation lặp lại, xen kẽ */
     }
 }
