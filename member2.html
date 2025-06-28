@@ -3,81 +3,2233 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nguyễn Văn A - Portfolio</title>
-
-  <script src="https://cdn.tailwindcss.com"></script>
-
+  <title>Portfolio - Lập Trình Viên Chuyên Nghiệp</title>
+  <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+  <script>tailwind.config={theme:{extend:{colors:{primary:'#3b82f6',secondary:'#10b981'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <style>
+    :where([class^="ri-"])::before { content: "\f3c2"; }
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    body {
+      font-family: 'Montserrat', sans-serif;
+      scroll-behavior: smooth;
+    }
 
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    .typing-animation {
+      overflow: hidden;
+      border-right: 2px solid #3b82f6;
+      white-space: nowrap;
+      margin: 0 auto;
+      animation: typing 3.5s steps(30, end), blink-caret 0.75s step-end infinite;
+    }
 
-  <link rel="stylesheet" href="css/style.css">
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: #3b82f6 }
+    }
+
+    .float-animation {
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+      100% { transform: translateY(0px); }
+    }
+
+    .progress-bar {
+      position: relative;
+      height: 8px;
+      border-radius: 4px;
+      background: #e5e7eb;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      background: #3b82f6;
+      width: 0;
+      transition: width 1.5s ease-in-out;
+    }
+
+    .counter {
+      transition: all 1s ease-in-out;
+    }
+
+    .project-card {
+      transition: all 0.3s ease;
+    }
+
+    .project-card:hover {
+      transform: scale(1.05);
+    }
+
+    .project-overlay {
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .project-card:hover .project-overlay {
+      opacity: 1;
+    }
+
+    .tech-icon {
+      transition: transform 0.5s ease;
+    }
+
+    .tech-icon:hover {
+      transform: rotate(360deg);
+    }
+
+    .ripple {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ripple:after {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      background-image: radial-gradient(circle, #fff 10%, transparent 10.01%);
+      background-repeat: no-repeat;
+      background-position: 50%;
+      transform: scale(10, 10);
+      opacity: 0;
+      transition: transform 0.5s, opacity 1s;
+    }
+
+    .ripple:active:after {
+      transform: scale(0, 0);
+      opacity: 0.3;
+      transition: 0s;
+    }
+
+    .progress-circle {
+      position: relative;
+      width: 80px;
+      height: 80px;
+    }
+
+    .progress-circle svg {
+      transform: rotate(-90deg);
+    }
+
+    .progress-circle circle {
+      fill: none;
+      stroke-width: 8;
+      stroke-linecap: round;
+    }
+
+    .progress-circle .bg {
+      stroke: #e5e7eb;
+    }
+
+    .progress-circle .progress {
+      stroke: #3b82f6;
+      stroke-dasharray: 251.2;
+      stroke-dashoffset: 251.2;
+      transition: stroke-dashoffset 1.5s ease-in-out;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      z-index: 1000;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal.show {
+      display: flex;
+      opacity: 1;
+    }
+
+    .modal-content {
+      transform: scale(0.7);
+      transition: transform 0.3s ease;
+    }
+
+    .modal.show .modal-content {
+      transform: scale(1);
+    }
+
+    .scroll-reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .scroll-reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .custom-cursor {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background-color: rgba(59, 130, 246, 0.5);
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      z-index: 9999;
+      transition: width 0.3s, height 0.3s, background-color 0.3s;
+      mix-blend-mode: difference;
+    }
+
+    .custom-cursor.active {
+      width: 50px;
+      height: 50px;
+      background-color: rgba(59, 130, 246, 0.3);
+    }
+
+    #particles-js {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+
+    .wave {
+      animation: wave 2s linear infinite;
+      display: inline-block;
+    }
+
+    @keyframes wave {
+      0% { transform: rotate(0deg); }
+      25% { transform: rotate(15deg); }
+      50% { transform: rotate(0deg); }
+      75% { transform: rotate(-15deg); }
+      100% { transform: rotate(0deg); }
+    }
+
+    .dark-mode {
+      background-color: #1f2937;
+      color: #f3f4f6;
+    }
+
+    .dark-mode .bg-white {
+      background-color: #374151;
+    }
+
+    .dark-mode .text-gray-800 {
+      color: #f3f4f6;
+    }
+
+    .dark-mode .text-gray-600 {
+      color: #d1d5db;
+    }
+
+    .dark-mode .border-gray-200 {
+      border-color: #4b5563;
+    }
+
+    .dark-mode .progress-bar {
+      background: #4b5563;
+    }
+
+    .dark-mode .progress-circle .bg {
+      stroke: #4b5563;
+    }
+
+    .dark-mode input, .dark-mode textarea {
+      background-color: #374151;
+      color: #f3f4f6;
+      border-color: #4b5563;
+    }
+
+    .loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+
+    .loader.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .loader-spinner {
+      width: 50px;
+      height: 50px;
+      border: 5px solid #f3f3f3;
+      border-top: 5px solid #3b82f6;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 70%;
+      height: 100%;
+      background-color: white;
+      z-index: 100;
+      transition: right 0.3s ease;
+      box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .mobile-menu.show {
+      right: 0;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 99;
+      display: none;
+    }
+
+    .overlay.show {
+      display: block;
+    }
+
+    @media (min-width: 768px) {
+      .mobile-menu {
+        display: none;
+      }
+    }
+
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  </style>
 </head>
-<body class="bg-gray-100 text-gray-900 font-sans leading-normal tracking-normal">
+<body class="bg-gray-50">
+<!-- Loader -->
+<div class="loader">
+  <div class="loader-spinner"></div>
+</div>
 
-<header class="bg-blue-700 py-6 text-white shadow-md">
-  <div class="container mx-auto px-4 text-center">
-    <h1 class="text-4xl font-bold" data-aos="fade-down">Nguyễn Văn A</h1>
-    <p class="mt-2 text-lg text-blue-100" data-aos="fade-down" data-aos-delay="200">Lập trình viên Front-end & UI/UX Designer</p>
+<!-- Custom Cursor -->
+<div class="custom-cursor hidden md:block"></div>
+
+<!-- Header -->
+<header class="fixed top-0 left-0 w-full bg-white shadow-md z-50">
+  <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+    <a href="#" class="text-2xl font-['Pacifico'] text-primary">logo</a>
+
+    <nav class="hidden md:flex items-center space-x-8">
+      <a href="#home" class="text-gray-800 hover:text-primary transition-all duration-300 transform hover:scale-105 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-primary after:transition-all after:duration-300 hover:after:w-full">Trang Chủ</a>
+      <a href="#about" class="text-gray-800 hover:text-primary transition-all duration-300 transform hover:scale-105 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-primary after:transition-all after:duration-300 hover:after:w-full">Giới Thiệu</a>
+      <a href="#projects" class="text-gray-800 hover:text-primary transition-all duration-300 transform hover:scale-105 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-primary after:transition-all after:duration-300 hover:after:w-full">Dự Án</a>
+      <a href="#skills" class="text-gray-800 hover:text-primary transition-all duration-300 transform hover:scale-105 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-primary after:transition-all after:duration-300 hover:after:w-full">Kỹ Năng</a>
+      <a href="#contact" class="text-gray-800 hover:text-primary transition-all duration-300 transform hover:scale-105 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-primary after:transition-all after:duration-300 hover:after:w-full">Liên Hệ</a>
+      <button id="darkModeToggle" class="w-10 h-10 flex items-center justify-center text-gray-800 hover:text-primary transition-all duration-300">
+        <i class="ri-sun-line ri-lg"></i>
+      </button>
+    </nav>
+
+    <button class="md:hidden w-10 h-10 flex items-center justify-center" id="mobileMenuBtn">
+      <i class="ri-menu-line ri-lg"></i>
+    </button>
   </div>
 </header>
 
-<main class="container mx-auto px-4 py-12">
-  <div class="bg-white rounded-lg shadow-lg p-8 md:flex md:items-start md:space-x-8">
-    <div class="md:w-1/3 flex flex-col items-center mb-8 md:mb-0" data-aos="fade-right">
-      <img src="images/member2.jpg" alt="Ảnh Nguyễn Văn A" class="w-64 h-64 object-cover object-center rounded-full border-4 border-blue-500 shadow-md">
-      <div class="mt-6 text-center">
-        <h3 class="text-xl font-semibold mb-3">Liên hệ với tôi</h3>
-        <div class="flex justify-center space-x-6">
-          <a href="https://linkedin.com/in/nguyenvana" target="_blank" class="text-blue-600 hover:text-blue-800 transition duration-300 text-3xl">
-            <i class="fab fa-linkedin"></i>
+<!-- Mobile Menu -->
+<div class="overlay" id="overlay"></div>
+<div class="mobile-menu p-6 flex flex-col">
+  <div class="flex justify-between items-center mb-8">
+    <a href="#" class="text-2xl font-['Pacifico'] text-primary">logo</a>
+    <button class="w-10 h-10 flex items-center justify-center" id="closeMenuBtn">
+      <i class="ri-close-line ri-lg"></i>
+    </button>
+  </div>
+  <nav class="flex flex-col space-y-6">
+    <a href="#home" class="text-gray-800 hover:text-primary transition-all duration-300 text-lg">Trang Chủ</a>
+    <a href="#about" class="text-gray-800 hover:text-primary transition-all duration-300 text-lg">Giới Thiệu</a>
+    <a href="#projects" class="text-gray-800 hover:text-primary transition-all duration-300 text-lg">Dự Án</a>
+    <a href="#skills" class="text-gray-800 hover:text-primary transition-all duration-300 text-lg">Kỹ Năng</a>
+    <a href="#contact" class="text-gray-800 hover:text-primary transition-all duration-300 text-lg">Liên Hệ</a>
+    <button id="mobileDarkModeToggle" class="flex items-center text-gray-800 hover:text-primary transition-all duration-300 text-lg">
+      <i class="ri-sun-line ri-lg mr-2"></i> Chế độ tối
+    </button>
+  </nav>
+</div>
+
+<!-- Hero Section -->
+<section id="home" class="min-h-screen flex items-center justify-center relative pt-24 pb-16">
+  <div id="particles-js" class="absolute inset-0"></div>
+  <div class="container mx-auto px-4">
+    <div class="flex flex-col md:flex-row items-center justify-between">
+      <div class="md:w-1/2 text-center md:text-left mb-12 md:mb-0">
+        <h1 class="text-4xl md:text-6xl font-bold mb-4 typing-animation inline-block">Nguyễn Lê Quốc Trung</h1>
+        <h2 class="text-xl md:text-2xl text-gray-600 mb-8">Lập Trình Viên Fullstack</h2>
+        <p class="text-gray-700 mb-8 max-w-lg mx-auto md:mx-0">Chuyên gia phát triển phần mềm với hơn 2 năm kinh nghiệm trong việc xây dựng ứng dụng web và mobile hiện đại, tối ưu và đáp ứng nhu cầu kinh doanh.</p>
+        <div class="flex flex-wrap justify-center md:justify-start gap-4">
+          <a href="#" class="bg-primary text-white px-6 py-3 !rounded-button font-medium hover:bg-blue-600 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl whitespace-nowrap">Tải CV</a>
+          <a href="#contact" class="bg-white text-primary px-6 py-3 !rounded-button font-medium border-2 border-primary hover:bg-primary hover:text-white transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl whitespace-nowrap">Liên Hệ</a>
+        </div>
+        <div class="flex justify-center md:justify-start mt-8 space-x-4">
+          <a href="#" class="w-10 h-10 flex items-center justify-center text-gray-600 hover:text-primary transition-all duration-300 transform hover:scale-110">
+            <i class="ri-github-fill ri-lg"></i>
           </a>
-          <a href="https://github.com/nguyenvana" target="_blank" class="text-gray-800 hover:text-black transition duration-300 text-3xl">
-            <i class="fab fa-github"></i>
+          <a href="#" class="w-10 h-10 flex items-center justify-center text-gray-600 hover:text-primary transition-all duration-300 transform hover:scale-110">
+            <i class="ri-linkedin-fill ri-lg"></i>
           </a>
-          <a href="mailto:nguyenvana@example.com" class="text-red-600 hover:text-red-800 transition duration-300 text-3xl">
-            <i class="fas fa-envelope"></i>
+          <a href="#" class="w-10 h-10 flex items-center justify-center text-gray-600 hover:text-primary transition-all duration-300 transform hover:scale-110">
+            <i class="ri-twitter-fill ri-lg"></i>
           </a>
+          <a href="#" class="w-10 h-10 flex items-center justify-center text-gray-600 hover:text-primary transition-all duration-300 transform hover:scale-110">
+            <i class="ri-instagram-fill ri-lg"></i>
+          </a>
+        </div>
+      </div>
+      <div class="md:w-1/2 flex justify-center">
+        <div class="relative w-64 h-64 md:w-80 md:h-80 float-animation">
+          <img src="images/member2.jpg" alt="Nguyễn Minh Tuấn" class="w-full h-full object-cover rounded-full border-4 border-primary shadow-2xl">
+          <div class="absolute -top-4 -right-4 bg-white rounded-full p-3 shadow-lg">
+            <div class="w-10 h-10 flex items-center justify-center text-primary">
+              <i class="ri-code-s-slash-line ri-lg"></i>
+            </div>
+          </div>
+          <div class="absolute -bottom-4 -left-4 bg-white rounded-full p-3 shadow-lg">
+            <div class="w-10 h-10 flex items-center justify-center text-primary">
+              <i class="ri-terminal-box-line ri-lg"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About Section -->
+<section id="about" class="py-20 bg-white">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-16 scroll-reveal">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">Giới Thiệu</h2>
+      <div class="w-20 h-1 bg-primary mx-auto"></div>
+    </div>
+    <div class="flex flex-col md:flex-row items-center">
+      <div class="md:w-1/2 mb-10 md:mb-0 scroll-reveal">
+        <div class="relative">
+          <img src="https://readdy.ai/api/search-image?query=professional%20Vietnamese%20software%20developer%20working%20on%20laptop%20in%20modern%20office%20environment%2C%20focused%2C%20professional%20attire%2C%20side%20view%2C%20showing%20coding%20on%20screen%2C%20high%20quality%2C%20detailed&width=600&height=800&seq=2&orientation=portrait" alt="About Me" class="w-full rounded-lg shadow-xl">
+          <div class="absolute -bottom-6 -right-6 bg-white p-4 rounded-lg shadow-lg">
+            <p class="text-lg font-bold text-primary">2+ Năm Kinh Nghiệm</p>
+          </div>
+        </div>
+      </div>
+      <div class="md:w-1/2 md:pl-12 scroll-reveal">
+        <h3 class="text-2xl font-bold mb-4">Lập Trình Viên Fullstack</h3>
+        <p class="text-gray-700 mb-6">Tôi là Nguyễn Lê Quốc Trung, một lập trình viên fullstack với hơn 2 năm kinh nghiệm trong việc phát triển các ứng dụng web và mobile. Tôi đam mê tạo ra những sản phẩm có giá trị và trải nghiệm người dùng tuyệt vời.</p>
+        <p class="text-gray-700 mb-8">Tôi đang học tại Đại Học Giao Thông Vận Tải Thành Phố Hồ Chí Minh chuyên ngành Công nghệ thông tin. Hiện tại, tôi đang thử việc tại một công ty phần mềm hàng đầu tại Việt Nam, nơi tôi phát triển các giải pháp phần mềm cho khách hàng trong nước và quốc tế.</p>
+
+        <div class="grid grid-cols-2 gap-6 mb-8">
+          <div class="flex items-center">
+            <div class="w-12 h-12 flex items-center justify-center bg-blue-100 rounded-full mr-4 text-primary">
+              <i class="ri-calendar-line ri-lg"></i>
+            </div>
+            <div>
+              <p class="text-gray-600">Ngày sinh</p>
+              <p class="font-medium">20/03/2005</p>
+            </div>
+          </div>
+          <div class="flex items-center">
+            <div class="w-12 h-12 flex items-center justify-center bg-blue-100 rounded-full mr-4 text-primary">
+              <i class="ri-mail-line ri-lg"></i>
+            </div>
+            <div>
+              <p class="text-gray-600">Email</p>
+              <p class="font-medium">trungnlq0717@ut.edu.vn</p>
+            </div>
+          </div>
+          <div class="flex items-center">
+            <div class="w-12 h-12 flex items-center justify-center bg-blue-100 rounded-full mr-4 text-primary">
+              <i class="ri-phone-line ri-lg"></i>
+            </div>
+            <div>
+              <p class="text-gray-600">Điện thoại</p>
+              <p class="font-medium">+84 984 205 714</p>
+            </div>
+          </div>
+          <div class="flex items-center">
+            <div class="w-12 h-12 flex items-center justify-center bg-blue-100 rounded-full mr-4 text-primary">
+              <i class="ri-map-pin-line ri-lg"></i>
+            </div>
+            <div>
+              <p class="text-gray-600">Địa chỉ</p>
+              <p class="font-medium">Hồ Chí Minh, Việt Nam</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-8 mb-8">
+          <div>
+            <div class="flex justify-between mb-2">
+              <span class="font-medium">Dự án hoàn thành</span>
+              <span class="font-bold text-primary counter" data-target="48">0</span>
+            </div>
+          </div>
+          <div>
+            <div class="flex justify-between mb-2">
+              <span class="font-medium">Khách hàng hài lòng</span>
+              <span class="font-bold text-primary counter" data-target="32">0</span>
+            </div>
+          </div>
+          <div>
+            <div class="flex justify-between mb-2">
+              <span class="font-medium">Giải thưởng</span>
+              <span class="font-bold text-primary counter" data-target="0">0</span>
+            </div>
+          </div>
+          <div>
+            <div class="flex justify-between mb-2">
+              <span class="font-medium">Năm kinh nghiệm</span>
+              <span class="font-bold text-primary counter" data-target="2">0</span>
+            </div>
+          </div>
+        </div>
+
+        <a href="#contact" class="inline-block bg-primary text-white px-6 py-3 !rounded-button font-medium hover:bg-blue-600 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl whitespace-nowrap">Liên hệ ngay</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Projects Section -->
+<section id="projects" class="py-20 bg-gray-50">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-16 scroll-reveal">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">Dự Án</h2>
+      <div class="w-20 h-1 bg-primary mx-auto mb-8"></div>
+      <p class="text-gray-700 max-w-2xl mx-auto">Dưới đây là một số dự án tiêu biểu mà tôi đã thực hiện. Mỗi dự án đều là kết quả của sự sáng tạo, kỹ thuật và sự tận tâm của tôi.</p>
+    </div>
+
+    <div class="flex justify-center mb-12 scroll-reveal">
+      <div class="inline-flex bg-white rounded-full p-1 shadow-md">
+        <button class="project-filter active px-6 py-2 rounded-full bg-primary text-white transition-all duration-300 whitespace-nowrap" data-filter="all">Tất cả</button>
+        <button class="project-filter px-6 py-2 rounded-full text-gray-700 hover:text-primary transition-all duration-300 whitespace-nowrap" data-filter="web">Web App</button>
+        <button class="project-filter px-6 py-2 rounded-full text-gray-700 hover:text-primary transition-all duration-300 whitespace-nowrap" data-filter="mobile">Mobile App</button>
+        <button class="project-filter px-6 py-2 rounded-full text-gray-700 hover:text-primary transition-all duration-300 whitespace-nowrap" data-filter="desktop">Desktop</button>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Project 1 -->
+      <div class="project-card bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 scroll-reveal" data-category="web">
+        <div class="relative overflow-hidden h-64">
+          <img src="https://readdy.ai/api/search-image?query=e-commerce%20website%20dashboard%20interface%2C%20modern%20UI%20design%2C%20clean%20layout%2C%20product%20management%20section%2C%20analytics%20charts%2C%20Vietnamese%20interface%20elements%2C%20professional%2C%20high%20quality&width=600&height=400&seq=3&orientation=landscape" alt="E-commerce Platform" class="w-full h-full object-cover transition-all duration-500 hover:scale-110">
+          <div class="project-overlay absolute inset-0 bg-primary bg-opacity-80 flex items-center justify-center">
+            <button class="view-project bg-white text-primary px-6 py-3 !rounded-button font-medium hover:bg-gray-100 transition-all duration-300 whitespace-nowrap" data-id="1">Xem chi tiết</button>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold mb-2">Nền tảng E-commerce</h3>
+          <p class="text-gray-600 mb-4">Xây dựng nền tảng thương mại điện tử hoàn chỉnh với tính năng thanh toán, quản lý sản phẩm và phân tích dữ liệu.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">React</span>
+            <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">Node.js</span>
+            <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded">MongoDB</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="project-card bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 scroll-reveal" data-category="mobile">
+        <div class="relative overflow-hidden h-64">
+          <img src="https://readdy.ai/api/search-image?query=food%20delivery%20mobile%20app%20interface%2C%20Vietnamese%20language%2C%20order%20tracking%20screen%2C%20restaurant%20listings%2C%20modern%20UI%20design%2C%20professional%2C%20high%20quality&width=600&height=400&seq=4&orientation=landscape" alt="Food Delivery App" class="w-full h-full object-cover transition-all duration-500 hover:scale-110">
+          <div class="project-overlay absolute inset-0 bg-primary bg-opacity-80 flex items-center justify-center">
+            <button class="view-project bg-white text-primary px-6 py-3 !rounded-button font-medium hover:bg-gray-100 transition-all duration-300 whitespace-nowrap" data-id="2">Xem chi tiết</button>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold mb-2">Ứng dụng giao đồ ăn</h3>
+          <p class="text-gray-600 mb-4">Phát triển ứng dụng di động cho phép người dùng đặt đồ ăn, theo dõi đơn hàng và đánh giá nhà hàng.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">React Native</span>
+            <span class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded">Firebase</span>
+            <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded">Redux</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 3 -->
+      <div class="project-card bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 scroll-reveal" data-category="web">
+        <div class="relative overflow-hidden h-64">
+          <img src="https://readdy.ai/api/search-image?query=learning%20management%20system%20dashboard%2C%20Vietnamese%20language%20interface%2C%20course%20listings%2C%20student%20progress%20tracking%2C%20modern%20educational%20platform%20UI%2C%20professional%2C%20high%20quality&width=600&height=400&seq=5&orientation=landscape" alt="Learning Management System" class="w-full h-full object-cover transition-all duration-500 hover:scale-110">
+          <div class="project-overlay absolute inset-0 bg-primary bg-opacity-80 flex items-center justify-center">
+            <button class="view-project bg-white text-primary px-6 py-3 !rounded-button font-medium hover:bg-gray-100 transition-all duration-300 whitespace-nowrap" data-id="3">Xem chi tiết</button>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold mb-2">Hệ thống quản lý học tập</h3>
+          <p class="text-gray-600 mb-4">Xây dựng LMS cho một trường đại học với tính năng quản lý khóa học, bài kiểm tra và theo dõi tiến độ học tập.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">Vue.js</span>
+            <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">Laravel</span>
+            <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded">MySQL</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 4 -->
+      <div class="project-card bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 scroll-reveal" data-category="desktop">
+        <div class="relative overflow-hidden h-64">
+          <img src="https://readdy.ai/api/search-image?query=video%20editing%20software%20interface%2C%20timeline%20view%2C%20editing%20tools%2C%20Vietnamese%20language%20UI%2C%20professional%20desktop%20application%2C%20high%20quality&width=600&height=400&seq=6&orientation=landscape" alt="Video Editing Software" class="w-full h-full object-cover transition-all duration-500 hover:scale-110">
+          <div class="project-overlay absolute inset-0 bg-primary bg-opacity-80 flex items-center justify-center">
+            <button class="view-project bg-white text-primary px-6 py-3 !rounded-button font-medium hover:bg-gray-100 transition-all duration-300 whitespace-nowrap" data-id="4">Xem chi tiết</button>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold mb-2">Phần mềm chỉnh sửa video</h3>
+          <p class="text-gray-600 mb-4">Phát triển ứng dụng desktop cho phép người dùng chỉnh sửa video với nhiều hiệu ứng và công cụ chuyên nghiệp.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">Electron</span>
+            <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded">FFmpeg</span>
+            <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded">WebGL</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 5 -->
+      <div class="project-card bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 scroll-reveal" data-category="mobile">
+        <div class="relative overflow-hidden h-64">
+          <img src="https://readdy.ai/api/search-image?query=fitness%20tracking%20mobile%20app%20interface%2C%20workout%20plans%2C%20progress%20charts%2C%20Vietnamese%20language%20UI%2C%20health%20statistics%2C%20modern%20mobile%20design%2C%20professional%2C%20high%20quality&width=600&height=400&seq=7&orientation=landscape" alt="Fitness Tracker App" class="w-full h-full object-cover transition-all duration-500 hover:scale-110">
+          <div class="project-overlay absolute inset-0 bg-primary bg-opacity-80 flex items-center justify-center">
+            <button class="view-project bg-white text-primary px-6 py-3 !rounded-button font-medium hover:bg-gray-100 transition-all duration-300 whitespace-nowrap" data-id="5">Xem chi tiết</button>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold mb-2">Ứng dụng theo dõi sức khỏe</h3>
+          <p class="text-gray-600 mb-4">Xây dựng ứng dụng di động giúp người dùng theo dõi hoạt động thể thao, chế độ ăn uống và chỉ số sức khỏe.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">Flutter</span>
+            <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">Firebase</span>
+            <span class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded">HealthKit</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 6 -->
+      <div class="project-card bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 scroll-reveal" data-category="web">
+        <div class="relative overflow-hidden h-64">
+          <img src="https://readdy.ai/api/search-image?query=real%20estate%20property%20management%20dashboard%2C%20Vietnamese%20language%20interface%2C%20property%20listings%2C%20analytics%2C%20modern%20web%20application%20UI%2C%20professional%2C%20high%20quality&width=600&height=400&seq=8&orientation=landscape" alt="Real Estate Platform" class="w-full h-full object-cover transition-all duration-500 hover:scale-110">
+          <div class="project-overlay absolute inset-0 bg-primary bg-opacity-80 flex items-center justify-center">
+            <button class="view-project bg-white text-primary px-6 py-3 !rounded-button font-medium hover:bg-gray-100 transition-all duration-300 whitespace-nowrap" data-id="6">Xem chi tiết</button>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold mb-2">Nền tảng bất động sản</h3>
+          <p class="text-gray-600 mb-4">Phát triển nền tảng web cho phép người dùng tìm kiếm, đăng tin và quản lý bất động sản với bản đồ tương tác.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">Angular</span>
+            <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">Django</span>
+            <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded">PostgreSQL</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Skills Section -->
+<section id="skills" class="py-20 bg-white">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-16 scroll-reveal">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">Kỹ Năng</h2>
+      <div class="w-20 h-1 bg-primary mx-auto mb-8"></div>
+      <p class="text-gray-700 max-w-2xl mx-auto">Tôi liên tục cập nhật và nâng cao các kỹ năng của mình để theo kịp với sự phát triển nhanh chóng của công nghệ.</p>
+    </div>
+
+    <div class="mb-12 scroll-reveal">
+      <div class="flex justify-center mb-8">
+        <div class="inline-flex bg-gray-100 rounded-full p-1 shadow-md">
+          <button class="skill-tab active px-6 py-2 rounded-full bg-primary text-white transition-all duration-300 whitespace-nowrap" data-tab="frontend">Frontend</button>
+          <button class="skill-tab px-6 py-2 rounded-full text-gray-700 hover:text-primary transition-all duration-300 whitespace-nowrap" data-tab="backend">Backend</button>
+          <button class="skill-tab px-6 py-2 rounded-full text-gray-700 hover:text-primary transition-all duration-300 whitespace-nowrap" data-tab="mobile">Mobile</button>
+          <button class="skill-tab px-6 py-2 rounded-full text-gray-700 hover:text-primary transition-all duration-300 whitespace-nowrap" data-tab="others">Khác</button>
+        </div>
+      </div>
+
+      <!-- Frontend Skills -->
+      <div class="skill-content active" id="frontend-skills">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div class="flex flex-col items-center">
+            <div class="tech-icon w-20 h-20 flex items-center justify-center bg-blue-100 rounded-full mb-4 text-blue-600">
+              <i class="ri-html5-fill ri-3x"></i>
+            </div>
+            <h4 class="text-lg font-medium mb-2">HTML5</h4>
+            <div class="progress-circle">
+              <svg width="80" height="80">
+                <circle class="bg" cx="40" cy="40" r="36"></circle>
+                <circle class="progress" cx="40" cy="40" r="36" data-percent="95"></circle>
+              </svg>
+              <div class="absolute inset-0 flex items-center justify-center">
+                <span class="text-lg font-bold">95%</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex flex-col items-center">
+            <div class="tech-icon w-20 h-20 flex items-center justify-center bg-blue-100 rounded-full mb-4 text-blue-600">
+              <i class="ri-css3-fill ri-3x"></i>
+            </div>
+            <h4 class="text-lg font-medium mb-2">CSS3</h4>
+            <div class="progress-circle">
+              <svg width="80" height="80">
+                <circle class="bg" cx="40" cy="40" r="36"></circle>
+                <circle class="progress" cx="40" cy="40" r="36" data-percent="90"></circle>
+              </svg>
+              <div class="absolute inset-0 flex items-center justify-center">
+                <span class="text-lg font-bold">90%</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex flex-col items-center">
+            <div class="tech-icon w-20 h-20 flex items-center justify-center bg-blue-100 rounded-full mb-4 text-blue-600">
+              <i class="ri-javascript-fill ri-3x"></i>
+            </div>
+            <h4 class="text-lg font-medium mb-2">JavaScript</h4>
+            <div class="progress-circle">
+              <svg width="80" height="80">
+                <circle class="bg" cx="40" cy="40" r="36"></circle>
+                <circle class="progress" cx="40" cy="40" r="36" data-percent="85"></circle>
+              </svg>
+              <div class="absolute inset-0 flex items-center justify-center">
+                <span class="text-lg font-bold">85%</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex flex-col items-center">
+            <div class="tech-icon w-20 h-20 flex items-center justify-center bg-blue-100 rounded-full mb-4 text-blue-600">
+              <i class="ri-reactjs-fill ri-3x"></i>
+            </div>
+            <h4 class="text-lg font-medium mb-2">React</h4>
+            <div class="progress-circle">
+              <svg width="80" height="80">
+                <circle class="bg" cx="40" cy="40" r="36"></circle>
+                <circle class="progress" cx="40" cy="40" r="36" data-percent="80"></circle>
+              </svg>
+              <div class="absolute inset-0 flex items-center justify-center">
+                <span class="text-lg font-bold">80%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-12">
+          <h4 class="text-xl font-bold mb-6">Các kỹ năng khác</h4>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="font-medium">Vue.js</span>
+                <span>75%</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-bar-fill" data-width="75"></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="font-medium">Angular</span>
+                <span>70%</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-bar-fill" data-width="70"></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="font-medium">Tailwind CSS</span>
+                <span>85%</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-bar-fill" data-width="85"></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="font-medium">TypeScript</span>
+                <span>80%</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-bar-fill" data-width="80"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Backend Skills -->
+      <div class="skill-content hidden" id="backend-skills">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div class="flex flex-col items-center">
+            <div class="tech-icon w-20 h-20 flex items-center justify-center bg-green-100 rounded-full mb-4 text-green-600">
+              <i class="ri-nodejs-fill ri-3x"></i>
+            </div>
+            <h4 class="text-lg font-medium mb-2">Node.js</h4>
+            <div class="progress-circle">
+              <svg width="80" height="80">
+                <circle class="bg" cx="40" cy="40" r="36"></circle>
+                <circle class="progress" cx="40" cy="40" r="36" data-percent="85"></circle>
+              </svg>
+              <div class="absolute inset-0 flex items-center justify-center">
+                <span class="text-lg font-bold">85%</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex flex-col items-center">
+            <div class="tech-icon w-20 h-20 flex items-center justify-center bg-green-100 rounded-full mb-4 text-green-600">
+              <i class="ri-database-2-fill ri-3x"></i>
+            </div>
+            <h4 class="text-lg font-medium mb-2">MongoDB</h4>
+            <div class="progress-circle">
+              <svg width="80" height="80">
+                <circle class="bg" cx="40" cy="40" r="36"></circle>
+                <circle class="progress" cx="40" cy="40" r="36" data-percent="80"></circle>
+              </svg>
+              <div class="absolute inset-0 flex items-center justify-center">
+                <span class="text-lg font-bold">80%</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex flex-col items-center">
+            <div class="tech-icon w-20 h-20 flex items-center justify-center bg-green-100 rounded-full mb-4 text-green-600">
+              <i class="ri-server-fill ri-3x"></i>
+            </div>
+            <h4 class="text-lg font-medium mb-2">Express.js</h4>
+            <div class="progress-circle">
+              <svg width="80" height="80">
+                <circle class="bg" cx="40" cy="40" r="36"></circle>
+                <circle class="progress" cx="40" cy="40" r="36" data-percent="85"></circle>
+              </svg>
+              <div class="absolute inset-0 flex items-center justify-center">
+                <span class="text-lg font-bold">85%</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex flex-col items-center">
+            <div class="tech-icon w-20 h-20 flex items-center justify-center bg-green-100 rounded-full mb-4 text-green-600">
+              <i class="ri-database-fill ri-3x"></i>
+            </div>
+            <h4 class="text-lg font-medium mb-2">MySQL</h4>
+            <div class="progress-circle">
+              <svg width="80" height="80">
+                <circle class="bg" cx="40" cy="40" r="36"></circle>
+                <circle class="progress" cx="40" cy="40" r="36" data-percent="75"></circle>
+              </svg>
+              <div class="absolute inset-0 flex items-center justify-center">
+                <span class="text-lg font-bold">75%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-12">
+          <h4 class="text-xl font-bold mb-6">Các kỹ năng khác</h4>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="font-medium">PHP/Laravel</span>
+                <span>70%</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-bar-fill" data-width="70"></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="font-medium">Python/Django</span>
+                <span>65%</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-bar-fill" data-width="65"></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="font-medium">GraphQL</span>
+                <span>75%</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-bar-fill" data-width="75"></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="font-medium">Docker</span>
+                <span>70%</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-bar-fill" data-width="70"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Skills -->
+      <div class="skill-content hidden" id="mobile-skills">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div class="flex flex-col items-center">
+            <div class="tech-icon w-20 h-20 flex items-center justify-center bg-purple-100 rounded-full mb-4 text-purple-600">
+              <i class="ri-reactjs-fill ri-3x"></i>
+            </div>
+            <h4 class="text-lg font-medium mb-2">React Native</h4>
+            <div class="progress-circle">
+              <svg width="80" height="80">
+                <circle class="bg" cx="40" cy="40" r="36"></circle>
+                <circle class="progress" cx="40" cy="40" r="36" data-percent="80"></circle>
+              </svg>
+              <div class="absolute inset-0 flex items-center justify-center">
+                <span class="text-lg font-bold">80%</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex flex-col items-center">
+            <div class="tech-icon w-20 h-20 flex items-center justify-center bg-purple-100 rounded-full mb-4 text-purple-600">
+              <i class="ri-flutter-fill ri-3x"></i>
+            </div>
+            <h4 class="text-lg font-medium mb-2">Flutter</h4>
+            <div class="progress-circle">
+              <svg width="80" height="80">
+                <circle class="bg" cx="40" cy="40" r="36"></circle>
+                <circle class="progress" cx="40" cy="40" r="36" data-percent="75"></circle>
+              </svg>
+              <div class="absolute inset-0 flex items-center justify-center">
+                <span class="text-lg font-bold">75%</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex flex-col items-center">
+            <div class="tech-icon w-20 h-20 flex items-center justify-center bg-purple-100 rounded-full mb-4 text-purple-600">
+              <i class="ri-android-fill ri-3x"></i>
+            </div>
+            <h4 class="text-lg font-medium mb-2">Android</h4>
+            <div class="progress-circle">
+              <svg width="80" height="80">
+                <circle class="bg" cx="40" cy="40" r="36"></circle>
+                <circle class="progress" cx="40" cy="40" r="36" data-percent="65"></circle>
+              </svg>
+              <div class="absolute inset-0 flex items-center justify-center">
+                <span class="text-lg font-bold">65%</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex flex-col items-center">
+            <div class="tech-icon w-20 h-20 flex items-center justify-center bg-purple-100 rounded-full mb-4 text-purple-600">
+              <i class="ri-apple-fill ri-3x"></i>
+            </div>
+            <h4 class="text-lg font-medium mb-2">iOS/Swift</h4>
+            <div class="progress-circle">
+              <svg width="80" height="80">
+                <circle class="bg" cx="40" cy="40" r="36"></circle>
+                <circle class="progress" cx="40" cy="40" r="36" data-percent="60"></circle>
+              </svg>
+              <div class="absolute inset-0 flex items-center justify-center">
+                <span class="text-lg font-bold">60%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-12">
+          <h4 class="text-xl font-bold mb-6">Các kỹ năng khác</h4>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="font-medium">Firebase</span>
+                <span>80%</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-bar-fill" data-width="80"></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="font-medium">Redux</span>
+                <span>75%</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-bar-fill" data-width="75"></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="font-medium">Mobile UI/UX</span>
+                <span>70%</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-bar-fill" data-width="70"></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="font-medium">App Performance</span>
+                <span>65%</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-bar-fill" data-width="65"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Other Skills -->
+      <div class="skill-content hidden" id="others-skills">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div class="flex flex-col items-center">
+            <div class="tech-icon w-20 h-20 flex items-center justify-center bg-yellow-100 rounded-full mb-4 text-yellow-600">
+              <i class="ri-git-branch-fill ri-3x"></i>
+            </div>
+            <h4 class="text-lg font-medium mb-2">Git</h4>
+            <div class="progress-circle">
+              <svg width="80" height="80">
+                <circle class="bg" cx="40" cy="40" r="36"></circle>
+                <circle class="progress" cx="40" cy="40" r="36" data-percent="90"></circle>
+              </svg>
+              <div class="absolute inset-0 flex items-center justify-center">
+                <span class="text-lg font-bold">90%</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex flex-col items-center">
+            <div class="tech-icon w-20 h-20 flex items-center justify-center bg-yellow-100 rounded-full mb-4 text-yellow-600">
+              <i class="ri-cloud-fill ri-3x"></i>
+            </div>
+            <h4 class="text-lg font-medium mb-2">AWS</h4>
+            <div class="progress-circle">
+              <svg width="80" height="80">
+                <circle class="bg" cx="40" cy="40" r="36"></circle>
+                <circle class="progress" cx="40" cy="40" r="36" data-percent="70"></circle>
+              </svg>
+              <div class="absolute inset-0 flex items-center justify-center">
+                <span class="text-lg font-bold">70%</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex flex-col items-center">
+            <div class="tech-icon w-20 h-20 flex items-center justify-center bg-yellow-100 rounded-full mb-4 text-yellow-600">
+              <i class="ri-test-tube-fill ri-3x"></i>
+            </div>
+            <h4 class="text-lg font-medium mb-2">Testing</h4>
+            <div class="progress-circle">
+              <svg width="80" height="80">
+                <circle class="bg" cx="40" cy="40" r="36"></circle>
+                <circle class="progress" cx="40" cy="40" r="36" data-percent="75"></circle>
+              </svg>
+              <div class="absolute inset-0 flex items-center justify-center">
+                <span class="text-lg font-bold">75%</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex flex-col items-center">
+            <div class="tech-icon w-20 h-20 flex items-center justify-center bg-yellow-100 rounded-full mb-4 text-yellow-600">
+              <i class="ri-terminal-box-fill ri-3x"></i>
+            </div>
+            <h4 class="text-lg font-medium mb-2">DevOps</h4>
+            <div class="progress-circle">
+              <svg width="80" height="80">
+                <circle class="bg" cx="40" cy="40" r="36"></circle>
+                <circle class="progress" cx="40" cy="40" r="36" data-percent="65"></circle>
+              </svg>
+              <div class="absolute inset-0 flex items-center justify-center">
+                <span class="text-lg font-bold">65%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-12">
+          <h4 class="text-xl font-bold mb-6">Kỹ năng mềm</h4>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="font-medium">Quản lý dự án</span>
+                <span>85%</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-bar-fill" data-width="85"></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="font-medium">Làm việc nhóm</span>
+                <span>90%</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-bar-fill" data-width="90"></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="font-medium">Giao tiếp</span>
+                <span>85%</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-bar-fill" data-width="85"></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="font-medium">Tiếng Anh</span>
+                <span>80%</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-bar-fill" data-width="80"></div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="md:w-2/3" data-aos="fade-left">
-      <h2 class="text-3xl font-bold text-gray-800 mb-4">Giới thiệu bản thân</h2>
-      <p class="text-gray-700 leading-relaxed mb-6">
-        Chào bạn! Tôi là Nguyễn Văn A, một lập trình viên Front-end với 5 năm kinh nghiệm trong việc xây dựng các ứng dụng web tương tác và thân thiện với người dùng. Tôi đam mê biến ý tưởng thiết kế thành hiện thực thông qua mã hóa sạch sẽ và hiệu quả. Bên cạnh đó, tôi cũng có kiến thức sâu rộng về UI/UX, giúp tôi tạo ra những trải nghiệm người dùng tối ưu.
-      </p>
-
-      <h3 class="text-2xl font-bold text-gray-800 mb-4">Kỹ năng</h3>
-      <div class="flex flex-wrap gap-2 mb-8">
-        <span class="bg-blue-200 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">HTML5</span>
-        <span class="bg-green-200 text-green-800 px-3 py-1 rounded-full text-sm font-medium">CSS3</span>
-        <span class="bg-yellow-200 text-yellow-800 px-3 py-1 rounded-full text-sm font-medium">JavaScript</span>
-        <span class="bg-purple-200 text-purple-800 px-3 py-1 rounded-full text-sm font-medium">ReactJS</span>
-        <span class="bg-red-200 text-red-800 px-3 py-1 rounded-full text-sm font-medium">Tailwind CSS</span>
-        <span class="bg-indigo-200 text-indigo-800 px-3 py-1 rounded-full text-sm font-medium">UI/UX Design</span>
-        <span class="bg-pink-200 text-pink-800 px-3 py-1 rounded-full text-sm font-medium">Figma</span>
-        <span class="bg-orange-200 text-orange-800 px-3 py-1 rounded-full text-sm font-medium">Git & GitHub</span>
-      </div>
-
-      <a href="index.html" class="inline-block bg-gray-600 text-white py-2 px-6 rounded-md hover:bg-gray-700 transition duration-300">
-        <i class="fas fa-arrow-left mr-2"></i> Quay lại Trang chủ
-      </a>
+    <div class="mt-16 scroll-reveal">
+      <div id="skillsChart" class="w-full h-80"></div>
     </div>
   </div>
-</main>
+</section>
 
-<footer class="bg-gray-800 text-white py-6 mt-8">
-  <div class="container mx-auto px-4 text-center">
-    <p>&copy; 2025 Digital Team Portfolio. All rights reserved.</p>
+<!-- Contact Section -->
+<section id="contact" class="py-20 bg-gray-50">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-16 scroll-reveal">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">Liên Hệ</h2>
+      <div class="w-20 h-1 bg-primary mx-auto mb-8"></div>
+      <p class="text-gray-700 max-w-2xl mx-auto">Hãy liên hệ với tôi nếu bạn có bất kỳ câu hỏi hoặc dự án nào cần thảo luận. Tôi luôn sẵn sàng hỗ trợ bạn.</p>
+    </div>
+
+    <div class="flex flex-col md:flex-row gap-10">
+      <div class="md:w-1/2 scroll-reveal">
+        <div class="bg-white rounded-lg shadow-lg p-8">
+          <h3 class="text-2xl font-bold mb-6">Gửi tin nhắn</h3>
+          <form id="contactForm">
+            <div class="mb-6">
+              <label for="name" class="block text-gray-700 font-medium mb-2">Họ và tên</label>
+              <input type="text" id="name" class="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Nhập họ và tên của bạn" required>
+            </div>
+
+            <div class="mb-6">
+              <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
+              <input type="email" id="email" class="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Nhập địa chỉ email của bạn" required>
+            </div>
+
+            <div class="mb-6">
+              <label for="subject" class="block text-gray-700 font-medium mb-2">Chủ đề</label>
+              <input type="text" id="subject" class="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Nhập chủ đề" required>
+            </div>
+
+            <div class="mb-6">
+              <label for="message" class="block text-gray-700 font-medium mb-2">Tin nhắn</label>
+              <textarea id="message" rows="5" class="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Nhập nội dung tin nhắn" required></textarea>
+            </div>
+
+            <button type="submit" class="w-full bg-primary text-white px-6 py-3 !rounded-button font-medium hover:bg-blue-600 transition-all duration-300 ripple flex items-center justify-center whitespace-nowrap">
+              <span>Gửi tin nhắn</span>
+              <i class="ri-send-plane-fill ri-lg ml-2"></i>
+            </button>
+          </form>
+
+          <div id="formSuccess" class="hidden mt-4 p-4 bg-green-100 text-green-700 rounded">
+            <div class="flex items-center">
+              <i class="ri-check-line ri-lg mr-2"></i>
+              <span>Tin nhắn của bạn đã được gửi thành công!</span>
+            </div>
+          </div>
+
+          <div id="formError" class="hidden mt-4 p-4 bg-red-100 text-red-700 rounded">
+            <div class="flex items-center">
+              <i class="ri-error-warning-line ri-lg mr-2"></i>
+              <span>Đã xảy ra lỗi. Vui lòng thử lại sau!</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="md:w-1/2 scroll-reveal">
+        <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+          <h3 class="text-2xl font-bold mb-6">Thông tin liên hệ</h3>
+
+          <div class="flex items-start mb-6">
+            <div class="w-12 h-12 flex items-center justify-center bg-blue-100 rounded-full mr-4 text-primary shrink-0">
+              <i class="ri-map-pin-line ri-lg"></i>
+            </div>
+            <div>
+              <h4 class="font-bold mb-1">Địa chỉ</h4>
+              <p class="text-gray-700">82 Tây Lân, Bình Trị Đông A, Bình Tân, Hồ Chí Minh, Việt Nam</p>
+            </div>
+          </div>
+
+          <div class="flex items-start mb-6">
+            <div class="w-12 h-12 flex items-center justify-center bg-blue-100 rounded-full mr-4 text-primary shrink-0">
+              <i class="ri-mail-line ri-lg"></i>
+            </div>
+            <div>
+              <h4 class="font-bold mb-1">Email</h4>
+              <p class="text-gray-700">trungnlq0717@ut.edu.vn</p>
+            </div>
+          </div>
+
+          <div class="flex items-start mb-6">
+            <div class="w-12 h-12 flex items-center justify-center bg-blue-100 rounded-full mr-4 text-primary shrink-0">
+              <i class="ri-phone-line ri-lg"></i>
+            </div>
+            <div>
+              <h4 class="font-bold mb-1">Điện thoại</h4>
+              <p class="text-gray-700">+84 984 205 714</p>
+            </div>
+          </div>
+
+          <div class="flex items-start">
+            <div class="w-12 h-12 flex items-center justify-center bg-blue-100 rounded-full mr-4 text-primary shrink-0">
+              <i class="ri-global-line ri-lg"></i>
+            </div>
+            <div>
+              <h4 class="font-bold mb-1">Website</h4>
+              <p class="text-gray-700">www.nguyenlequoctrung.com</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden h-80">
+          <div class="h-full w-full" style="background-image: url('https://public.readdy.ai/gen_page/map_placeholder_1280x720.png'); background-position: center; background-size: cover;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-gray-800 text-white py-12">
+  <div class="container mx-auto px-4">
+    <div class="flex flex-col md:flex-row justify-between mb-12">
+      <div class="mb-8 md:mb-0">
+        <a href="#" class="text-3xl font-['Pacifico'] text-white mb-4 inline-block">logo</a>
+        <p class="text-gray-400 max-w-md mb-6">Lập trình viên fullstack với hơn 2 năm kinh nghiệm phát triển các ứng dụng web và mobile hiện đại, tối ưu và đáp ứng nhu cầu kinh doanh.</p>
+        <div class="flex space-x-4">
+          <a href="#" class="w-10 h-10 flex items-center justify-center bg-gray-700 rounded-full text-white hover:bg-primary transition-all duration-300">
+            <i class="ri-github-fill ri-lg"></i>
+          </a>
+          <a href="#" class="w-10 h-10 flex items-center justify-center bg-gray-700 rounded-full text-white hover:bg-primary transition-all duration-300">
+            <i class="ri-linkedin-fill ri-lg"></i>
+          </a>
+          <a href="#" class="w-10 h-10 flex items-center justify-center bg-gray-700 rounded-full text-white hover:bg-primary transition-all duration-300">
+            <i class="ri-twitter-fill ri-lg"></i>
+          </a>
+          <a href="#" class="w-10 h-10 flex items-center justify-center bg-gray-700 rounded-full text-white hover:bg-primary transition-all duration-300">
+            <i class="ri-instagram-fill ri-lg"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="mb-8 md:mb-0">
+        <h4 class="text-xl font-bold mb-6">Liên kết</h4>
+        <ul class="space-y-3">
+          <li><a href="#home" class="text-gray-400 hover:text-white transition-all duration-300">Trang chủ</a></li>
+          <li><a href="#about" class="text-gray-400 hover:text-white transition-all duration-300">Giới thiệu</a></li>
+          <li><a href="#projects" class="text-gray-400 hover:text-white transition-all duration-300">Dự án</a></li>
+          <li><a href="#skills" class="text-gray-400 hover:text-white transition-all duration-300">Kỹ năng</a></li>
+          <li><a href="#contact" class="text-gray-400 hover:text-white transition-all duration-300">Liên hệ</a></li>
+        </ul>
+      </div>
+
+      <div class="mb-8 md:mb-0">
+        <h4 class="text-xl font-bold mb-6">Dịch vụ</h4>
+        <ul class="space-y-3">
+          <li><a href="#" class="text-gray-400 hover:text-white transition-all duration-300">Phát triển Web</a></li>
+          <li><a href="#" class="text-gray-400 hover:text-white transition-all duration-300">Phát triển Mobile</a></li>
+          <li><a href="#" class="text-gray-400 hover:text-white transition-all duration-300">UI/UX Design</a></li>
+          <li><a href="#" class="text-gray-400 hover:text-white transition-all duration-300">Tư vấn IT</a></li>
+          <li><a href="#" class="text-gray-400 hover:text-white transition-all duration-300">Đào tạo</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-xl font-bold mb-6">Đăng ký nhận tin</h4>
+        <p class="text-gray-400 mb-4">Đăng ký để nhận những thông tin mới nhất về công nghệ và dự án của tôi.</p>
+        <form id="subscribeForm" class="flex">
+          <input type="email" placeholder="Email của bạn" class="px-4 py-2 w-full bg-gray-700 text-white border-none rounded-l focus:outline-none focus:ring-2 focus:ring-primary">
+          <button type="submit" class="bg-primary text-white px-4 py-2 rounded-r hover:bg-blue-600 transition-all duration-300 whitespace-nowrap">Đăng ký</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="pt-8 border-t border-gray-700 flex flex-col md:flex-row justify-between items-center">
+      <p class="text-gray-400 mb-4 md:mb-0">&copy; 2025 Nguyễn Lê Quốc Trung. All rights reserved.</p>
+      <div class="flex items-center">
+        <span class="text-gray-400 mr-2">Xin chào! <span class="wave">👋</span></span>
+        <a href="#home" class="w-10 h-10 flex items-center justify-center bg-gray-700 rounded-full text-white hover:bg-primary transition-all duration-300">
+          <i class="ri-arrow-up-line ri-lg"></i>
+        </a>
+      </div>
+    </div>
   </div>
 </footer>
 
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script src="js/script.js" defer></script>
+<!-- Project Modals -->
+<div class="modal" id="projectModal1">
+  <div class="modal-content bg-white rounded-lg max-w-4xl mx-auto my-12 p-8 relative">
+    <button class="close-modal absolute top-4 right-4 w-8 h-8 flex items-center justify-center text-gray-500 hover:text-gray-800">
+      <i class="ri-close-line ri-lg"></i>
+    </button>
+
+    <h3 class="text-2xl font-bold mb-4">Nền tảng E-commerce</h3>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-6">
+      <div>
+        <img src="https://readdy.ai/api/search-image?query=e-commerce%20website%20dashboard%20interface%2C%20modern%20UI%20design%2C%20clean%20layout%2C%20product%20management%20section%2C%20analytics%20charts%2C%20Vietnamese%20interface%20elements%2C%20professional%2C%20high%20quality&width=600&height=400&seq=9&orientation=landscape" alt="E-commerce Platform" class="w-full h-auto rounded-lg">
+      </div>
+
+      <div>
+        <div class="mb-4">
+          <h4 class="text-lg font-bold mb-2">Mô tả dự án</h4>
+          <p class="text-gray-700">Xây dựng nền tảng thương mại điện tử hoàn chỉnh với tính năng thanh toán, quản lý sản phẩm và phân tích dữ liệu. Hệ thống hỗ trợ nhiều phương thức thanh toán và tích hợp với các dịch vụ vận chuyển.</p>
+        </div>
+
+        <div class="mb-4">
+          <h4 class="text-lg font-bold mb-2">Công nghệ sử dụng</h4>
+          <div class="flex flex-wrap gap-2">
+            <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">React</span>
+            <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">Node.js</span>
+            <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded">MongoDB</span>
+            <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded">Redux</span>
+            <span class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded">Stripe</span>
+            <span class="bg-indigo-100 text-indigo-800 text-xs font-medium px-2.5 py-0.5 rounded">AWS</span>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-lg font-bold mb-2">Vai trò</h4>
+          <p class="text-gray-700">Lead Developer</p>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <h4 class="text-lg font-bold mb-4">Tính năng chính</h4>
+      <ul class="list-disc pl-5 mb-6 text-gray-700 grid grid-cols-1 md:grid-cols-2 gap-2">
+        <li>Quản lý sản phẩm và danh mục</li>
+        <li>Giỏ hàng và thanh toán trực tuyến</li>
+        <li>Hệ thống đánh giá và bình luận</li>
+        <li>Quản lý đơn hàng và vận chuyển</li>
+        <li>Báo cáo và phân tích dữ liệu</li>
+        <li>Tích hợp với các nền tảng mạng xã hội</li>
+        <li>Hệ thống khuyến mãi và mã giảm giá</li>
+        <li>Trang quản trị cho người bán hàng</li>
+      </ul>
+
+      <a href="#" class="inline-block bg-primary text-white px-6 py-3 !rounded-button font-medium hover:bg-blue-600 transition-all duration-300 whitespace-nowrap">Xem demo</a>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="projectModal2">
+  <div class="modal-content bg-white rounded-lg max-w-4xl mx-auto my-12 p-8 relative">
+    <button class="close-modal absolute top-4 right-4 w-8 h-8 flex items-center justify-center text-gray-500 hover:text-gray-800">
+      <i class="ri-close-line ri-lg"></i>
+    </button>
+
+    <h3 class="text-2xl font-bold mb-4">Ứng dụng giao đồ ăn</h3>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-6">
+      <div>
+        <img src="https://readdy.ai/api/search-image?query=food%20delivery%20mobile%20app%20interface%2C%20Vietnamese%20language%2C%20order%20tracking%20screen%2C%20restaurant%20listings%2C%20modern%20UI%20design%2C%20professional%2C%20high%20quality&width=600&height=400&seq=10&orientation=landscape" alt="Food Delivery App" class="w-full h-auto rounded-lg">
+      </div>
+
+      <div>
+        <div class="mb-4">
+          <h4 class="text-lg font-bold mb-2">Mô tả dự án</h4>
+          <p class="text-gray-700">Phát triển ứng dụng di động cho phép người dùng đặt đồ ăn, theo dõi đơn hàng và đánh giá nhà hàng. Ứng dụng tích hợp bản đồ để theo dõi vị trí người giao hàng và hỗ trợ nhiều phương thức thanh toán.</p>
+        </div>
+
+        <div class="mb-4">
+          <h4 class="text-lg font-bold mb-2">Công nghệ sử dụng</h4>
+          <div class="flex flex-wrap gap-2">
+            <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">React Native</span>
+            <span class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded">Firebase</span>
+            <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded">Redux</span>
+            <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">Google Maps API</span>
+            <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded">Node.js</span>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-lg font-bold mb-2">Vai trò</h4>
+          <p class="text-gray-700">Mobile Developer</p>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <h4 class="text-lg font-bold mb-4">Tính năng chính</h4>
+      <ul class="list-disc pl-5 mb-6 text-gray-700 grid grid-cols-1 md:grid-cols-2 gap-2">
+        <li>Tìm kiếm nhà hàng và món ăn</li>
+        <li>Đặt hàng và thanh toán trực tuyến</li>
+        <li>Theo dõi đơn hàng theo thời gian thực</li>
+        <li>Đánh giá và bình luận</li>
+        <li>Lịch sử đơn hàng</li>
+        <li>Thông báo đẩy</li>
+        <li>Tích hợp nhiều phương thức thanh toán</li>
+        <li>Chương trình khách hàng thân thiết</li>
+      </ul>
+
+      <a href="#" class="inline-block bg-primary text-white px-6 py-3 !rounded-button font-medium hover:bg-blue-600 transition-all duration-300 whitespace-nowrap">Xem demo</a>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="projectModal3">
+  <div class="modal-content bg-white rounded-lg max-w-4xl mx-auto my-12 p-8 relative">
+    <button class="close-modal absolute top-4 right-4 w-8 h-8 flex items-center justify-center text-gray-500 hover:text-gray-800">
+      <i class="ri-close-line ri-lg"></i>
+    </button>
+
+    <h3 class="text-2xl font-bold mb-4">Hệ thống quản lý học tập</h3>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-6">
+      <div>
+        <img src="https://readdy.ai/api/search-image?query=learning%20management%20system%20dashboard%2C%20Vietnamese%20language%20interface%2C%20course%20listings%2C%20student%20progress%20tracking%2C%20modern%20educational%20platform%20UI%2C%20professional%2C%20high%20quality&width=600&height=400&seq=11&orientation=landscape" alt="Learning Management System" class="w-full h-auto rounded-lg">
+      </div>
+
+      <div>
+        <div class="mb-4">
+          <h4 class="text-lg font-bold mb-2">Mô tả dự án</h4>
+          <p class="text-gray-700">Xây dựng hệ thống quản lý học tập (LMS) cho một trường đại học với tính năng quản lý khóa học, bài kiểm tra và theo dõi tiến độ học tập. Hệ thống hỗ trợ nhiều định dạng nội dung học tập và tương tác giữa giảng viên và sinh viên.</p>
+        </div>
+
+        <div class="mb-4">
+          <h4 class="text-lg font-bold mb-2">Công nghệ sử dụng</h4>
+          <div class="flex flex-wrap gap-2">
+            <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">Vue.js</span>
+            <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">Laravel</span>
+            <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded">MySQL</span>
+            <span class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded">Redis</span>
+            <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded">WebSockets</span>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-lg font-bold mb-2">Vai trò</h4>
+          <p class="text-gray-700">Fullstack Developer</p>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <h4 class="text-lg font-bold mb-4">Tính năng chính</h4>
+      <ul class="list-disc pl-5 mb-6 text-gray-700 grid grid-cols-1 md:grid-cols-2 gap-2">
+        <li>Quản lý khóa học và bài giảng</li>
+        <li>Hệ thống kiểm tra và đánh giá</li>
+        <li>Theo dõi tiến độ học tập</li>
+        <li>Diễn đàn thảo luận</li>
+        <li>Lịch học và thông báo</li>
+        <li>Tích hợp video trực tuyến</li>
+        <li>Báo cáo và phân tích dữ liệu</li>
+        <li>Quản lý tài liệu học tập</li>
+      </ul>
+
+      <a href="#" class="inline-block bg-primary text-white px-6 py-3 !rounded-button font-medium hover:bg-blue-600 transition-all duration-300 whitespace-nowrap">Xem demo</a>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="projectModal4">
+  <div class="modal-content bg-white rounded-lg max-w-4xl mx-auto my-12 p-8 relative">
+    <button class="close-modal absolute top-4 right-4 w-8 h-8 flex items-center justify-center text-gray-500 hover:text-gray-800">
+      <i class="ri-close-line ri-lg"></i>
+    </button>
+
+    <h3 class="text-2xl font-bold mb-4">Phần mềm chỉnh sửa video</h3>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-6">
+      <div>
+        <img src="https://readdy.ai/api/search-image?query=video%20editing%20software%20interface%2C%20timeline%20view%2C%20editing%20tools%2C%20Vietnamese%20language%20UI%2C%20professional%20desktop%20application%2C%20high%20quality&width=600&height=400&seq=12&orientation=landscape" alt="Video Editing Software" class="w-full h-auto rounded-lg">
+      </div>
+
+      <div>
+        <div class="mb-4">
+          <h4 class="text-lg font-bold mb-2">Mô tả dự án</h4>
+          <p class="text-gray-700">Phát triển ứng dụng desktop cho phép người dùng chỉnh sửa video với nhiều hiệu ứng và công cụ chuyên nghiệp. Phần mềm hỗ trợ nhiều định dạng video và xuất bản với chất lượng cao.</p>
+        </div>
+
+        <div class="mb-4">
+          <h4 class="text-lg font-bold mb-2">Công nghệ sử dụng</h4>
+          <div class="flex flex-wrap gap-2">
+            <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">Electron</span>
+            <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded">FFmpeg</span>
+            <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded">WebGL</span>
+            <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">React</span>
+            <span class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded">Node.js</span>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-lg font-bold mb-2">Vai trò</h4>
+          <p class="text-gray-700">Desktop Application Developer</p>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <h4 class="text-lg font-bold mb-4">Tính năng chính</h4>
+      <ul class="list-disc pl-5 mb-6 text-gray-700 grid grid-cols-1 md:grid-cols-2 gap-2">
+        <li>Chỉnh sửa video đa track</li>
+        <li>Hiệu ứng chuyển cảnh và filter</li>
+        <li>Chỉnh sửa âm thanh</li>
+        <li>Xuất bản nhiều định dạng</li>
+        <li>Hỗ trợ chỉnh sửa 4K</li>
+        <li>Tạo tiêu đề và phụ đề</li>
+        <li>Thư viện template</li>
+        <li>Tích hợp chia sẻ trực tuyến</li>
+      </ul>
+
+      <a href="#" class="inline-block bg-primary text-white px-6 py-3 !rounded-button font-medium hover:bg-blue-600 transition-all duration-300 whitespace-nowrap">Xem demo</a>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="projectModal5">
+  <div class="modal-content bg-white rounded-lg max-w-4xl mx-auto my-12 p-8 relative">
+    <button class="close-modal absolute top-4 right-4 w-8 h-8 flex items-center justify-center text-gray-500 hover:text-gray-800">
+      <i class="ri-close-line ri-lg"></i>
+    </button>
+
+    <h3 class="text-2xl font-bold mb-4">Ứng dụng theo dõi sức khỏe</h3>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-6">
+      <div>
+        <img src="https://readdy.ai/api/search-image?query=fitness%20tracking%20mobile%20app%20interface%2C%20workout%20plans%2C%20progress%20charts%2C%20Vietnamese%20language%20UI%2C%20health%20statistics%2C%20modern%20mobile%20design%2C%20professional%2C%20high%20quality&width=600&height=400&seq=13&orientation=landscape" alt="Fitness Tracker App" class="w-full h-auto rounded-lg">
+      </div>
+
+      <div>
+        <div class="mb-4">
+          <h4 class="text-lg font-bold mb-2">Mô tả dự án</h4>
+          <p class="text-gray-700">Xây dựng ứng dụng di động giúp người dùng theo dõi hoạt động thể thao, chế độ ăn uống và chỉ số sức khỏe. Ứng dụng tích hợp với các thiết bị đeo thông minh và cung cấp phân tích dữ liệu chi tiết.</p>
+        </div>
+
+        <div class="mb-4">
+          <h4 class="text-lg font-bold mb-2">Công nghệ sử dụng</h4>
+          <div class="flex flex-wrap gap-2">
+            <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">Flutter</span>
+            <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">Firebase</span>
+            <span class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded">HealthKit</span>
+            <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded">Google Fit API</span>
+            <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded">Bluetooth LE</span>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-lg font-bold mb-2">Vai trò</h4>
+          <p class="text-gray-700">Mobile Developer</p>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <h4 class="text-lg font-bold mb-4">Tính năng chính</h4>
+      <ul class="list-disc pl-5 mb-6 text-gray-700 grid grid-cols-1 md:grid-cols-2 gap-2">
+        <li>Theo dõi hoạt động thể thao</li>
+        <li>Ghi chép chế độ ăn uống</li>
+        <li>Đo lường chỉ số sức khỏe</li>
+        <li>Biểu đồ và phân tích dữ liệu</li>
+        <li>Tích hợp thiết bị đeo thông minh</li>
+        <li>Lịch tập luyện và nhắc nhở</li>
+        <li>Cộng đồng và thách thức</li>
+        <li>Tư vấn sức khỏe cá nhân hóa</li>
+      </ul>
+
+      <a href="#" class="inline-block bg-primary text-white px-6 py-3 !rounded-button font-medium hover:bg-blue-600 transition-all duration-300 whitespace-nowrap">Xem demo</a>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="projectModal6">
+  <div class="modal-content bg-white rounded-lg max-w-4xl mx-auto my-12 p-8 relative">
+    <button class="close-modal absolute top-4 right-4 w-8 h-8 flex items-center justify-center text-gray-500 hover:text-gray-800">
+      <i class="ri-close-line ri-lg"></i>
+    </button>
+
+    <h3 class="text-2xl font-bold mb-4">Nền tảng bất động sản</h3>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-6">
+      <div>
+        <img src="https://readdy.ai/api/search-image?query=real%20estate%20property%20management%20dashboard%2C%20Vietnamese%20language%20interface%2C%20property%20listings%2C%20analytics%2C%20modern%20web%20application%20UI%2C%20professional%2C%20high%20quality&width=600&height=400&seq=14&orientation=landscape" alt="Real Estate Platform" class="w-full h-auto rounded-lg">
+      </div>
+
+      <div>
+        <div class="mb-4">
+          <h4 class="text-lg font-bold mb-2">Mô tả dự án</h4>
+          <p class="text-gray-700">Phát triển nền tảng web cho phép người dùng tìm kiếm, đăng tin và quản lý bất động sản với bản đồ tương tác. Hệ thống cung cấp công cụ phân tích thị trường và tích hợp với các dịch vụ tài chính.</p>
+        </div>
+
+        <div class="mb-4">
+          <h4 class="text-lg font-bold mb-2">Công nghệ sử dụng</h4>
+          <div class="flex flex-wrap gap-2">
+            <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">Angular</span>
+            <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">Django</span>
+            <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded">PostgreSQL</span>
+            <span class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded">Elasticsearch</span>
+            <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded">Google Maps API</span>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-lg font-bold mb-2">Vai trò</h4>
+          <p class="text-gray-700">Fullstack Developer</p>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <h4 class="text-lg font-bold mb-4">Tính năng chính</h4>
+      <ul class="list-disc pl-5 mb-6 text-gray-700 grid grid-cols-1 md:grid-cols-2 gap-2">
+        <li>Tìm kiếm bất động sản nâng cao</li>
+        <li>Bản đồ tương tác</li>
+        <li>Đăng tin và quản lý bất động sản</li>
+        <li>Hệ thống đánh giá và bình luận</li>
+        <li>Phân tích thị trường</li>
+        <li>Tích hợp dịch vụ tài chính</li>
+        <li>Lịch hẹn xem nhà</li>
+        <li>Báo cáo và thống kê</li>
+      </ul>
+
+      <a href="#" class="inline-block bg-primary text-white px-6 py-3 !rounded-button font-medium hover:bg-blue-600 transition-all duration-300 whitespace-nowrap">Xem demo</a>
+    </div>
+  </div>
+</div>
+
+<!-- Back to Top Button -->
+<button id="backToTop" class="fixed bottom-8 right-8 w-12 h-12 bg-primary text-white rounded-full shadow-lg flex items-center justify-center opacity-0 invisible transition-all duration-300">
+  <i class="ri-arrow-up-line ri-lg"></i>
+</button>
+
+<script id="loaderScript">
+  document.addEventListener('DOMContentLoaded', function() {
+    // Loader
+    setTimeout(function() {
+      const loader = document.querySelector('.loader');
+      loader.classList.add('hidden');
+      setTimeout(function() {
+        loader.style.display = 'none';
+      }, 500);
+    }, 1500);
+  });
+</script>
+
+<script id="navigationScript">
+  document.addEventListener('DOMContentLoaded', function() {
+    // Mobile Menu
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const closeMenuBtn = document.getElementById('closeMenuBtn');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    const overlay = document.getElementById('overlay');
+
+    mobileMenuBtn.addEventListener('click', function() {
+      mobileMenu.classList.add('show');
+      overlay.classList.add('show');
+      document.body.style.overflow = 'hidden';
+    });
+
+    closeMenuBtn.addEventListener('click', function() {
+      mobileMenu.classList.remove('show');
+      overlay.classList.remove('show');
+      document.body.style.overflow = '';
+    });
+
+    overlay.addEventListener('click', function() {
+      mobileMenu.classList.remove('show');
+      overlay.classList.remove('show');
+      document.body.style.overflow = '';
+    });
+
+    // Mobile Menu Links
+    const mobileMenuLinks = document.querySelectorAll('.mobile-menu a');
+    mobileMenuLinks.forEach(link => {
+      link.addEventListener('click', function() {
+        mobileMenu.classList.remove('show');
+        overlay.classList.remove('show');
+        document.body.style.overflow = '';
+      });
+    });
+
+    // Smooth Scroll
+    const scrollLinks = document.querySelectorAll('a[href^="#"]');
+    scrollLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          const headerHeight = document.querySelector('header').offsetHeight;
+          const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - headerHeight;
+
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    // Back to Top Button
+    const backToTopBtn = document.getElementById('backToTop');
+
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 500) {
+        backToTopBtn.classList.remove('opacity-0', 'invisible');
+        backToTopBtn.classList.add('opacity-100', 'visible');
+      } else {
+        backToTopBtn.classList.remove('opacity-100', 'visible');
+        backToTopBtn.classList.add('opacity-0', 'invisible');
+      }
+    });
+
+    backToTopBtn.addEventListener('click', function() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  });
+</script>
+
+<script id="darkModeScript">
+  document.addEventListener('DOMContentLoaded', function() {
+    // Dark Mode Toggle
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const mobileDarkModeToggle = document.getElementById('mobileDarkModeToggle');
+    const body = document.body;
+    const isDarkMode = localStorage.getItem('darkMode') === 'true';
+
+    // Set initial state
+    if (isDarkMode) {
+      body.classList.add('dark-mode');
+      darkModeToggle.innerHTML = '<i class="ri-moon-line ri-lg"></i>';
+      mobileDarkModeToggle.innerHTML = '<i class="ri-moon-line ri-lg mr-2"></i> Chế độ sáng';
+    }
+
+    function toggleDarkMode() {
+      body.classList.toggle('dark-mode');
+      const isDark = body.classList.contains('dark-mode');
+      localStorage.setItem('darkMode', isDark);
+
+      if (isDark) {
+        darkModeToggle.innerHTML = '<i class="ri-moon-line ri-lg"></i>';
+        mobileDarkModeToggle.innerHTML = '<i class="ri-moon-line ri-lg mr-2"></i> Chế độ sáng';
+      } else {
+        darkModeToggle.innerHTML = '<i class="ri-sun-line ri-lg"></i>';
+        mobileDarkModeToggle.innerHTML = '<i class="ri-sun-line ri-lg mr-2"></i> Chế độ tối';
+      }
+    }
+
+    darkModeToggle.addEventListener('click', toggleDarkMode);
+    mobileDarkModeToggle.addEventListener('click', toggleDarkMode);
+  });
+</script>
+
+<script id="particlesScript">
+  document.addEventListener('DOMContentLoaded', function() {
+    // Particles.js
+    particlesJS('particles-js', {
+      "particles": {
+        "number": {
+          "value": 80,
+          "density": {
+            "enable": true,
+            "value_area": 800
+          }
+        },
+        "color": {
+          "value": "#3b82f6"
+        },
+        "shape": {
+          "type": "circle",
+          "stroke": {
+            "width": 0,
+            "color": "#000000"
+          },
+          "polygon": {
+            "nb_sides": 5
+          }
+        },
+        "opacity": {
+          "value": 0.5,
+          "random": false,
+          "anim": {
+            "enable": false,
+            "speed": 1,
+            "opacity_min": 0.1,
+            "sync": false
+          }
+        },
+        "size": {
+          "value": 3,
+          "random": true,
+          "anim": {
+            "enable": false,
+            "speed": 40,
+            "size_min": 0.1,
+            "sync": false
+          }
+        },
+        "line_linked": {
+          "enable": true,
+          "distance": 150,
+          "color": "#3b82f6",
+          "opacity": 0.4,
+          "width": 1
+        },
+        "move": {
+          "enable": true,
+          "speed": 2,
+          "direction": "none",
+          "random": false,
+          "straight": false,
+          "out_mode": "out",
+          "bounce": false,
+          "attract": {
+            "enable": false,
+            "rotateX": 600,
+            "rotateY": 1200
+          }
+        }
+      },
+      "interactivity": {
+        "detect_on": "canvas",
+        "events": {
+          "onhover": {
+            "enable": true,
+            "mode": "grab"
+          },
+          "onclick": {
+            "enable": true,
+            "mode": "push"
+          },
+          "resize": true
+        },
+        "modes": {
+          "grab": {
+            "distance": 140,
+            "line_linked": {
+              "opacity": 1
+            }
+          },
+          "bubble": {
+            "distance": 400,
+            "size": 40,
+            "duration": 2,
+            "opacity": 8,
+            "speed": 3
+          },
+          "repulse": {
+            "distance": 200,
+            "duration": 0.4
+          },
+          "push": {
+            "particles_nb": 4
+          },
+          "remove": {
+            "particles_nb": 2
+          }
+        }
+      },
+      "retina_detect": true
+    });
+  });
+</script>
+
+<script id="animationsScript">
+  document.addEventListener('DOMContentLoaded', function() {
+    // Custom Cursor
+    const cursor = document.querySelector('.custom-cursor');
+
+    if (window.innerWidth > 768) {
+      document.addEventListener('mousemove', function(e) {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+      });
+
+      document.addEventListener('mousedown', function() {
+        cursor.classList.add('active');
+      });
+
+      document.addEventListener('mouseup', function() {
+        cursor.classList.remove('active');
+      });
+
+      const links = document.querySelectorAll('a, button');
+      links.forEach(link => {
+        link.addEventListener('mouseenter', function() {
+          cursor.classList.add('active');
+        });
+
+        link.addEventListener('mouseleave', function() {
+          cursor.classList.remove('active');
+        });
+      });
+    }
+
+    // Scroll Reveal
+    const scrollRevealElements = document.querySelectorAll('.scroll-reveal');
+
+    function checkScroll() {
+      scrollRevealElements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+
+        if (elementTop < windowHeight * 0.85) {
+          element.classList.add('active');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', checkScroll);
+    checkScroll(); // Check on initial load
+
+    // Progress Bars Animation
+    const progressBars = document.querySelectorAll('.progress-bar-fill');
+
+    function animateProgressBars() {
+      progressBars.forEach(bar => {
+        const elementTop = bar.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+
+        if (elementTop < windowHeight * 0.85) {
+          const width = bar.getAttribute('data-width');
+          bar.style.width = width + '%';
+        }
+      });
+    }
+
+    window.addEventListener('scroll', animateProgressBars);
+
+    // Progress Circles Animation
+    const progressCircles = document.querySelectorAll('.progress-circle .progress');
+
+    function animateProgressCircles() {
+      progressCircles.forEach(circle => {
+        const elementTop = circle.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+
+        if (elementTop < windowHeight * 0.85) {
+          const percent = circle.getAttribute('data-percent');
+          const circumference = 2 * Math.PI * 36;
+          const offset = circumference - (percent / 100) * circumference;
+          circle.style.strokeDashoffset = offset;
+        }
+      });
+    }
+
+    window.addEventListener('scroll', animateProgressCircles);
+
+    // Counter Animation
+    const counters = document.querySelectorAll('.counter');
+
+    function animateCounters() {
+      counters.forEach(counter => {
+        const elementTop = counter.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+
+        if (elementTop < windowHeight * 0.85 && !counter.classList.contains('animated')) {
+          counter.classList.add('animated');
+          const target = parseInt(counter.getAttribute('data-target'));
+          let count = 0;
+          const duration = 2000; // 2 seconds
+          const interval = duration / target;
+
+          const timer = setInterval(function() {
+            count++;
+            counter.textContent = count;
+
+            if (count >= target) {
+              clearInterval(timer);
+            }
+          }, interval);
+        }
+      });
+    }
+
+    window.addEventListener('scroll', animateCounters);
+  });
+</script>
+
+<script id="projectsScript">
+  document.addEventListener('DOMContentLoaded', function() {
+    // Project Filters
+    const filterButtons = document.querySelectorAll('.project-filter');
+    const projectCards = document.querySelectorAll('.project-card');
+
+    filterButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        // Remove active class from all buttons
+        filterButtons.forEach(btn => {
+          btn.classList.remove('active', 'bg-primary', 'text-white');
+          btn.classList.add('text-gray-700', 'hover:text-primary');
+        });
+
+        // Add active class to clicked button
+        this.classList.add('active', 'bg-primary', 'text-white');
+        this.classList.remove('text-gray-700', 'hover:text-primary');
+
+        const filter = this.getAttribute('data-filter');
+
+        // Filter projects
+        projectCards.forEach(card => {
+          if (filter === 'all' || card.getAttribute('data-category') === filter) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Project Modals
+    const viewProjectButtons = document.querySelectorAll('.view-project');
+    const closeModalButtons = document.querySelectorAll('.close-modal');
+    const modals = document.querySelectorAll('.modal');
+
+    viewProjectButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        const projectId = this.getAttribute('data-id');
+        const modal = document.getElementById('projectModal' + projectId);
+
+        modal.classList.add('show');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    closeModalButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        const modal = this.closest('.modal');
+        modal.classList.remove('show');
+        document.body.style.overflow = '';
+      });
+    });
+
+    modals.forEach(modal => {
+      modal.addEventListener('click', function(e) {
+        if (e.target === this) {
+          this.classList.remove('show');
+          document.body.style.overflow = '';
+        }
+      });
+    });
+  });
+</script>
+
+<script id="skillsScript">
+  document.addEventListener('DOMContentLoaded', function() {
+    // Skills Tabs
+    const skillTabs = document.querySelectorAll('.skill-tab');
+    const skillContents = document.querySelectorAll('.skill-content');
+
+    skillTabs.forEach(tab => {
+      tab.addEventListener('click', function() {
+        // Remove active class from all tabs
+        skillTabs.forEach(t => {
+          t.classList.remove('active', 'bg-primary', 'text-white');
+          t.classList.add('text-gray-700', 'hover:text-primary');
+        });
+
+        // Add active class to clicked tab
+        this.classList.add('active', 'bg-primary', 'text-white');
+        this.classList.remove('text-gray-700', 'hover:text-primary');
+
+        // Hide all content
+        skillContents.forEach(content => {
+          content.classList.remove('active');
+          content.classList.add('hidden');
+        });
+
+        // Show selected content
+        const tabId = this.getAttribute('data-tab');
+        const content = document.getElementById(tabId + '-skills');
+        content.classList.add('active');
+        content.classList.remove('hidden');
+      });
+    });
+
+    // Skills Chart
+    const skillsChart = echarts.init(document.getElementById('skillsChart'));
+
+    const option = {
+      animation: false,
+      title: {
+        text: 'Tổng quan kỹ năng',
+        left: 'center',
+        textStyle: {
+          color: '#1f2937'
+        }
+      },
+      tooltip: {
+        trigger: 'axis',
+        backgroundColor: 'rgba(255, 255, 255, 0.8)',
+        textStyle: {
+          color: '#1f2937'
+        }
+      },
+      radar: {
+        indicator: [
+          { name: 'Frontend', max: 100 },
+          { name: 'Backend', max: 100 },
+          { name: 'Mobile', max: 100 },
+          { name: 'UI/UX', max: 100 },
+          { name: 'Database', max: 100 },
+          { name: 'DevOps', max: 100 }
+        ],
+        splitArea: {
+          areaStyle: {
+            color: ['rgba(255, 255, 255, 0.1)']
+          }
+        }
+      },
+      series: [{
+        name: 'Kỹ năng',
+        type: 'radar',
+        data: [
+          {
+            value: [90, 80, 75, 70, 80, 65],
+            name: 'Mức độ thành thạo',
+            areaStyle: {
+              color: 'rgba(87, 181, 231, 0.1)'
+            },
+            lineStyle: {
+              color: 'rgba(87, 181, 231, 1)'
+            },
+            itemStyle: {
+              color: 'rgba(87, 181, 231, 1)'
+            }
+          }
+        ]
+      }]
+    };
+
+    skillsChart.setOption(option);
+
+    // Resize chart when window resizes
+    window.addEventListener('resize', function() {
+      skillsChart.resize();
+    });
+  });
+</script>
+
+<script id="contactScript">
+  document.addEventListener('DOMContentLoaded', function() {
+    // Contact Form
+    const contactForm = document.getElementById('contactForm');
+    const formSuccess = document.getElementById('formSuccess');
+    const formError = document.getElementById('formError');
+
+    contactForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      // Simulate form submission
+      const submitButton = this.querySelector('button[type="submit"]');
+      const originalText = submitButton.innerHTML;
+
+      submitButton.innerHTML = '<i class="ri-loader-2-line ri-spin ri-lg"></i> Đang gửi...';
+      submitButton.disabled = true;
+
+      setTimeout(function() {
+        formSuccess.classList.remove('hidden');
+        formError.classList.add('hidden');
+        submitButton.innerHTML = originalText;
+        submitButton.disabled = false;
+        contactForm.reset();
+
+        setTimeout(function() {
+          formSuccess.classList.add('hidden');
+        }, 5000);
+      }, 2000);
+    });
+
+    // Subscribe Form
+    const subscribeForm = document.getElementById('subscribeForm');
+
+    subscribeForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      // Simulate form submission
+      const submitButton = this.querySelector('button[type="submit"]');
+      const originalText = submitButton.textContent;
+
+      submitButton.textContent = 'Đang xử lý...';
+      submitButton.disabled = true;
+
+      setTimeout(function() {
+        alert('Cảm ơn bạn đã đăng ký nhận tin!');
+        submitButton.textContent = originalText;
+        submitButton.disabled = false;
+        subscribeForm.reset();
+      }, 1500);
+    });
+  });
+</script>
 </body>
 </html>
